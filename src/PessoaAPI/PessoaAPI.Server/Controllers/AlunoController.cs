@@ -1,8 +1,8 @@
-﻿using PessoaAPI.Data;
-using PessoaAPI.Service;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
+using PessoaAPI.Data;
+using PessoaAPI.Service;
 using System.Collections.Generic;
 using UPDown.Common.PessoaAPI;
 
@@ -27,12 +27,7 @@ namespace PessoaAPI.Server.Controllers
         [HttpGet("{id}")]
         public AlunoDTO Get([FromRoute] string id)
         {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return null;
-            }
-
-            return new AlunoService(_dbContext).Get(long.Parse(id));
+            return string.IsNullOrWhiteSpace(id) ? null : new AlunoService(_dbContext).Get(long.Parse(id));
         }
 
         [HttpGet]

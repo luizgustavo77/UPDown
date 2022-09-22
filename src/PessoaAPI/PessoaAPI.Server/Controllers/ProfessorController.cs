@@ -1,12 +1,12 @@
-﻿using ProfessorAPI.Service;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
 using PessoaAPI.Data;
+using PessoaAPI.Service;
+using System.Collections.Generic;
 using UPDown.Common.PessoaAPI;
 
-namespace ProfessorAPI.Server.Controllers
+namespace PessoaAPI.Server.Controllers
 {
     // Todo:
     // Melhorar o microserviço para ser mais genérico
@@ -27,12 +27,7 @@ namespace ProfessorAPI.Server.Controllers
         [HttpGet("{id}")]
         public ProfessorDTO Get([FromRoute] string id)
         {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return null;
-            }
-
-            return new ProfessorService(_dbContext).Get(long.Parse(id));
+            return string.IsNullOrWhiteSpace(id) ? null : new ProfessorService(_dbContext).Get(long.Parse(id));
         }
 
         [HttpGet]

@@ -1,34 +1,34 @@
-﻿using PessoaAPI.Data;
-using PessoaAPI.Data.Entities;
+﻿using AulaAPI.Data;
+using AulaAPI.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UPDown.Common.PessoaAPI;
+using UPDown.Common.AulaAPI;
 
-namespace PessoaAPI.Service
+namespace AulaAPI.Service
 {
-    public class AlunoService
+    public class MateriaService
     {
         #region Private members
         private readonly DatabaseContext _dbContext;
         #endregion
 
         #region Constructor
-        public AlunoService(DatabaseContext dbContext)
+        public MateriaService(DatabaseContext dbContext)
         {
             _dbContext = dbContext;
         }
         #endregion
 
         #region Public methods
-        public AlunoDTO Get(long Id)
+        public MateriaDTO Get(long Id)
         {
-            AlunoDTO result = new AlunoDTO();
+            MateriaDTO result = new();
 
             try
             {
-                result = _dbContext.Alunos.Where(x => x.Id == Id)
-                                                .Select(x => Mapping.Mapper.Map<AlunoDTO>(x))
+                result = _dbContext.Materias.Where(x => x.Id == Id)
+                                                .Select(x => Mapping.Mapper.Map<MateriaDTO>(x))
                                                 .FirstOrDefault(); ;
             }
             catch (Exception)
@@ -39,13 +39,13 @@ namespace PessoaAPI.Service
             return result;
         }
 
-        public List<AlunoDTO> GetAll(int pagesize, int currentpage)
+        public List<MateriaDTO> GetAll(int pagesize, int currentpage)
         {
-            List<AlunoDTO> result = new List<AlunoDTO>();
+            List<MateriaDTO> result = new();
 
             try
             {
-                IQueryable<Aluno> query = _dbContext.Alunos;
+                IQueryable<Materia> query = _dbContext.Materias;
 
                 if (currentpage > 0)
                 {
@@ -57,9 +57,9 @@ namespace PessoaAPI.Service
                     query = query.Take(pagesize);
                 }
 
-                List<Aluno> list = query.ToList();
+                List<Materia> list = query.ToList();
 
-                result = list.Select(x => Mapping.Mapper.Map<AlunoDTO>(x)).ToList();
+                result = list.Select(x => Mapping.Mapper.Map<MateriaDTO>(x)).ToList();
             }
             catch (Exception)
             {
@@ -69,16 +69,16 @@ namespace PessoaAPI.Service
             return result;
         }
 
-        public void Add(AlunoDTO dto)
+        public void Add(MateriaDTO dto)
         {
             try
             {
-                long newId = _dbContext.Alunos.OrderBy(x => x.Id).Select(x => x.Id).LastOrDefault();
+                long newId = _dbContext.Materias.OrderBy(x => x.Id).Select(x => x.Id).LastOrDefault();
 
                 dto.Id = (newId + 1).ToString();
 
-                _dbContext.Alunos.Add(Mapping.Mapper.Map<Aluno>(dto));
-                _dbContext.SaveChanges();
+                _ = _dbContext.Materias.Add(Mapping.Mapper.Map<Materia>(dto));
+                _ = _dbContext.SaveChanges();
             }
             catch (Exception)
             {
@@ -86,12 +86,12 @@ namespace PessoaAPI.Service
             }
         }
 
-        public void Edit(AlunoDTO dto)
+        public void Edit(MateriaDTO dto)
         {
             try
             {
-                _dbContext.Update(Mapping.Mapper.Map<Aluno>(dto));
-                _dbContext.SaveChanges();
+                _ = _dbContext.Update(Mapping.Mapper.Map<Materia>(dto));
+                _ = _dbContext.SaveChanges();
             }
             catch (Exception)
             {
@@ -103,9 +103,9 @@ namespace PessoaAPI.Service
         {
             try
             {
-                Aluno Aluno = _dbContext.Alunos.Where(x => x.Id == Id).FirstOrDefault(); ;
-                _dbContext.Alunos.Remove(Mapping.Mapper.Map<Aluno>(Aluno));
-                _dbContext.SaveChanges();
+                Materia Materia = _dbContext.Materias.Where(x => x.Id == Id).FirstOrDefault(); ;
+                _ = _dbContext.Materias.Remove(Mapping.Mapper.Map<Materia>(Materia));
+                _ = _dbContext.SaveChanges();
             }
             catch (Exception)
             {

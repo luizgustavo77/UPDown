@@ -1,15 +1,15 @@
-﻿using PessoaAPI.Data.Entities;
+﻿using AulaAPI.Data.Entities;
 using AutoMapper;
 using System;
-using UPDown.Common.PessoaAPI;
+using UPDown.Common.AulaAPI;
 
-namespace PessoaAPI.Service
+namespace AulaAPI.Service
 {
     public static class Mapping
     {
-        private static readonly Lazy<IMapper> Lazy = new Lazy<IMapper>(() =>
+        private static readonly Lazy<IMapper> Lazy = new(() =>
         {
-            MapperConfiguration config = new MapperConfiguration(cfg =>
+            MapperConfiguration config = new(cfg =>
             {
                 // This line ensures that internal Propertys are also mapped over.
                 cfg.ShouldMapProperty = p => p.GetMethod.IsPublic || p.GetMethod.IsAssembly;
@@ -26,8 +26,8 @@ namespace PessoaAPI.Service
     {
         public MappingProfile()
         {
-            CreateMap<Aluno, AlunoDTO>().ReverseMap();
-            CreateMap<Professor, ProfessorDTO>().ReverseMap();
+            _ = CreateMap<Competencia, CompetenciaDTO>().ReverseMap();
+            _ = CreateMap<Materia, MateriaDTO>().ReverseMap();
 
         }
     }

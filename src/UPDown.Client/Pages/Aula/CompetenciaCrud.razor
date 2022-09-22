@@ -1,0 +1,27 @@
+﻿@page "/competenciacrud"
+
+@code {
+#if DEBUG
+    string endpoint = "https://localhost:44307/Competencia";
+#else
+    string endpoint = "https://localhost:44307/Competencia";
+#endif
+
+    public List<FTTBlazor.FTTGridColumn> cols = new List<FTTBlazor.FTTGridColumn>();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        cols.Add(new FTTBlazor.FTTGridColumn() { FieldName = "Id", FieldDescription = "Id" });
+        cols.Add(new FTTBlazor.FTTGridColumn() { FieldName = "Name", FieldDescription = "Nome" });
+    }
+}
+
+<div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" style="height: 35rem;">
+
+    <FTTCrud Interface="Common.AulaAPI.CompetenciaDTO" Columns="cols" Endpoint="@endpoint" Title="Competencias">
+        <ModalContent>
+            <FTTInput Required="true" Label="Nome" @bind-Value="@context.Name" Size="12"></FTTInput>
+        </ModalContent>
+    </FTTCrud>
+
+</div>

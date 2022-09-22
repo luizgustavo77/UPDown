@@ -1,5 +1,5 @@
-﻿using PessoaAPI.Data.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using PessoaAPI.Data.Entities;
 using System.Collections.Generic;
 
 namespace PessoaAPI.Data
@@ -10,7 +10,7 @@ namespace PessoaAPI.Data
         public DatabaseContext(DbContextOptions<DatabaseContext> options)
                 : base(options)
         {
-            Database.EnsureCreated();
+            _ = Database.EnsureCreated();
         }
         #endregion
 
@@ -22,8 +22,8 @@ namespace PessoaAPI.Data
         #region Overidden methods
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Aluno>().HasData(GetAlunos());
-            modelBuilder.Entity<Professor>().HasData(GetProfessors());
+            _ = modelBuilder.Entity<Aluno>().HasData(GetAlunos());
+            _ = modelBuilder.Entity<Professor>().HasData(GetProfessors());
             base.OnModelCreating(modelBuilder);
         }
         #endregion

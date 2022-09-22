@@ -15,7 +15,7 @@ namespace PessoaAPI.Server
             return Host.CreateDefaultBuilder(args)
                     .ConfigureWebHostDefaults(webBuilder =>
                     {
-                        webBuilder.UseStartup<Startup>();
+                        _ = webBuilder.UseStartup<Startup>();
                     });
         }
     }

@@ -1,35 +1,34 @@
 ﻿using PessoaAPI.Data;
 using PessoaAPI.Data.Entities;
-using PessoaAPI.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UPDown.Common.PessoaAPI;
 
-namespace ProfessorAPI.Service
+namespace PessoaAPI.Service
 {
-    public class ProfessorService
+    public class AlunoService
     {
         #region Private members
         private readonly DatabaseContext _dbContext;
         #endregion
 
         #region Constructor
-        public ProfessorService(DatabaseContext dbContext)
+        public AlunoService(DatabaseContext dbContext)
         {
             _dbContext = dbContext;
         }
         #endregion
 
         #region Public methods
-        public ProfessorDTO Get(long Id)
+        public AlunoDTO Get(long Id)
         {
-            ProfessorDTO result = new ProfessorDTO();
+            AlunoDTO result = new();
 
             try
             {
-                result = _dbContext.Professores.Where(x => x.Id == Id)
-                                                .Select(x => Mapping.Mapper.Map<ProfessorDTO>(x))
+                result = _dbContext.Alunos.Where(x => x.Id == Id)
+                                                .Select(x => Mapping.Mapper.Map<AlunoDTO>(x))
                                                 .FirstOrDefault(); ;
             }
             catch (Exception)
@@ -40,13 +39,13 @@ namespace ProfessorAPI.Service
             return result;
         }
 
-        public List<ProfessorDTO> GetAll(int pagesize, int currentpage)
+        public List<AlunoDTO> GetAll(int pagesize, int currentpage)
         {
-            List<ProfessorDTO> result = new List<ProfessorDTO>();
+            List<AlunoDTO> result = new();
 
             try
             {
-                IQueryable<Professor> query = _dbContext.Professores;
+                IQueryable<Aluno> query = _dbContext.Alunos;
 
                 if (currentpage > 0)
                 {
@@ -58,9 +57,9 @@ namespace ProfessorAPI.Service
                     query = query.Take(pagesize);
                 }
 
-                List<Professor> list = query.ToList();
+                List<Aluno> list = query.ToList();
 
-                result = list.Select(x => Mapping.Mapper.Map<ProfessorDTO>(x)).ToList();
+                result = list.Select(x => Mapping.Mapper.Map<AlunoDTO>(x)).ToList();
             }
             catch (Exception)
             {
@@ -70,16 +69,16 @@ namespace ProfessorAPI.Service
             return result;
         }
 
-        public void Add(ProfessorDTO dto)
+        public void Add(AlunoDTO dto)
         {
             try
             {
-                long newId = _dbContext.Professores.OrderBy(x => x.Id).Select(x => x.Id).LastOrDefault();
+                long newId = _dbContext.Alunos.OrderBy(x => x.Id).Select(x => x.Id).LastOrDefault();
 
                 dto.Id = (newId + 1).ToString();
 
-                _dbContext.Professores.Add(Mapping.Mapper.Map<Professor>(dto));
-                _dbContext.SaveChanges();
+                _ = _dbContext.Alunos.Add(Mapping.Mapper.Map<Aluno>(dto));
+                _ = _dbContext.SaveChanges();
             }
             catch (Exception)
             {
@@ -87,12 +86,12 @@ namespace ProfessorAPI.Service
             }
         }
 
-        public void Edit(ProfessorDTO dto)
+        public void Edit(AlunoDTO dto)
         {
             try
             {
-                _dbContext.Update(Mapping.Mapper.Map<Professor>(dto));
-                _dbContext.SaveChanges();
+                _ = _dbContext.Update(Mapping.Mapper.Map<Aluno>(dto));
+                _ = _dbContext.SaveChanges();
             }
             catch (Exception)
             {
@@ -104,9 +103,9 @@ namespace ProfessorAPI.Service
         {
             try
             {
-                Professor Professor = _dbContext.Professores.Where(x => x.Id == Id).FirstOrDefault(); ;
-                _dbContext.Professores.Remove(Mapping.Mapper.Map<Professor>(Professor));
-                _dbContext.SaveChanges();
+                Aluno Aluno = _dbContext.Alunos.Where(x => x.Id == Id).FirstOrDefault(); ;
+                _ = _dbContext.Alunos.Remove(Mapping.Mapper.Map<Aluno>(Aluno));
+                _ = _dbContext.SaveChanges();
             }
             catch (Exception)
             {

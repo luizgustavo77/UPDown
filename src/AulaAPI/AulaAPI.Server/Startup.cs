@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
-namespace PessoaAPI.Server
+namespace AulaAPI.Server
 {
     public class Startup
     {
@@ -20,24 +20,24 @@ namespace PessoaAPI.Server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(Options =>
+            _ = services.AddCors(Options =>
                             Options.AddPolicy("AllowOrigion",
                                     builder =>
                                     {
-                                        builder.AllowAnyOrigin()
+                                        _ = builder.AllowAnyOrigin()
                                                 .AllowAnyHeader()
                                                 .AllowAnyMethod();
                                     }));
 
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
+            _ = services.AddControllers();
+            _ = services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "PessoaAPI.Server", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "AulaAPI.Server", Version = "v1" });
             });
 
-            services.AddDbContext<Data.DatabaseContext>(options =>
+            _ = services.AddDbContext<Data.DatabaseContext>(options =>
             {
-                options.UseSqlite("Data Source = PessoaAPI.db");
+                _ = options.UseSqlite("Data Source = AulaAPI.db");
             });
         }
 
@@ -46,22 +46,22 @@ namespace PessoaAPI.Server
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "UPDown.Server v1"));
+                _ = app.UseDeveloperExceptionPage();
+                _ = app.UseSwagger();
+                _ = app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "UPDown.Server v1"));
             }
 
-            app.UseRouting();
+            _ = app.UseRouting();
 
-            app.UseCors("AllowOrigion");
+            _ = app.UseCors("AllowOrigion");
 
-            app.UseAuthentication();
+            _ = app.UseAuthentication();
 
-            app.UseAuthorization();
+            _ = app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            _ = app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                _ = endpoints.MapControllers();
             });
         }
     }

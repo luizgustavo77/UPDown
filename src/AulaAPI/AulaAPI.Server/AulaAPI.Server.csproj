@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\UPDown.Common\UPDown.Common.csproj" />
+    <ProjectReference Include="..\AulaAPI.Data\AulaAPI.Data.csproj" />
+    <ProjectReference Include="..\AulaAPI.Service\AulaAPI.Service.csproj" />
+  </ItemGroup>
+
+</Project>
