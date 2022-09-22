@@ -1,0 +1,29 @@
+﻿@page "/alunocrud"
+
+@code {
+#if DEBUG
+    string endpoint = "https://localhost:44306/Aluno";
+#else
+    string endpoint = "https://localhost:44306/Aluno";
+#endif
+
+    public List<FTTBlazor.FTTGridColumn> cols = new List<FTTBlazor.FTTGridColumn>();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        cols.Add(new FTTBlazor.FTTGridColumn() { FieldName = "Id", FieldDescription = "Id" });
+        cols.Add(new FTTBlazor.FTTGridColumn() { FieldName = "Name", FieldDescription = "Nome" });
+    }
+}
+
+<div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" style="height: 35rem;">
+
+    <FTTCrud Interface="Common.PessoaAPI.AlunoDTO" Columns="cols" Endpoint="@endpoint" Title="Alunos">
+        <ModalContent>
+            <FTTInput Required="true" Label="Nome" @bind-Value="@context.Name" Size="12"></FTTInput>
+            <FTTInput Required="true" Label="E-Mail" Type="InputType.Email" @bind-Value="@context.Email" Size="6"></FTTInput>
+            <FTTInput Required="true" Label="Senha" @bind-Value="@context.Senha" Size="6"></FTTInput>
+        </ModalContent>
+    </FTTCrud>
+
+</div>
