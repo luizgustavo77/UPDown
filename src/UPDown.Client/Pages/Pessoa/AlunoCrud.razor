@@ -18,7 +18,7 @@
 
 <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" style="height: 35rem;">
 
-    <FTTCrud Interface="Common.PessoaAPI.AlunoDTO" Columns="cols" Endpoint="@endpoint" Title="Alunos">
+    <FTTCrud Interface="Common.PessoaAPI.AlunoDTO" Columns="cols" Endpoint="@APIGateway.Alunos" Title="Alunos">
         <ModalContent>
             <FTTInput Required="true" Label="Nome" @bind-Value="@context.Name" Size="12"></FTTInput>
             <FTTInput Required="true" Label="E-Mail" Type="InputType.Email" @bind-Value="@context.Email" Size="6"></FTTInput>

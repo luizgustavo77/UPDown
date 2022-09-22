@@ -1,12 +1,6 @@
 ﻿@page "/competenciacrud"
 
 @code {
-#if DEBUG
-    string endpoint = "https://localhost:44307/Competencia";
-#else
-    string endpoint = "https://localhost:44307/Competencia";
-#endif
-
     public List<FTTBlazor.FTTGridColumn> cols = new List<FTTBlazor.FTTGridColumn>();
 
     protected override async Task OnParametersSetAsync()
@@ -18,9 +12,31 @@
 
 <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" style="height: 35rem;">
 
-    <FTTCrud Interface="Common.AulaAPI.CompetenciaDTO" Columns="cols" Endpoint="@endpoint" Title="Competencias">
+    <FTTCrud Interface="Common.AulaAPI.CompetenciaDTO" Columns="cols" Endpoint="@APIGateway.Competencias" Title="Competencias">
         <ModalContent>
             <FTTInput Required="true" Label="Nome" @bind-Value="@context.Name" Size="12"></FTTInput>
+            <FTTSelect BorderRight="true"
+                       T="Common.AulaAPI.MateriaDTO"
+                       Size="8"
+                       DataSourceEndpoint="@APIGateway.Materias"
+                       Required="true"
+                       DataSourceDescField="Name"
+                       @bind-DataId="@context.IdMateria"
+                       @bind-DataDesc="@context.NameMateria"
+                       Label="Materia"
+                       Filter="(x => !string.IsNullOrWhiteSpace(x.Name))">
+            </FTTSelect>
+            <FTTSelect BorderRight="true"
+                       T="Common.PessoaAPI.ProfessorDTO"
+                       Size="8"
+                       DataSourceEndpoint="@APIGateway.Professores"
+                       Required="true"
+                       DataSourceDescField="Name"
+                       @bind-DataId="@context.IdProfessor"
+                       @bind-DataDesc="@context.NameProfessor"
+                       Label="Professor"
+                       Filter="(x => !string.IsNullOrWhiteSpace(x.Name))">
+            </FTTSelect>
         </ModalContent>
     </FTTCrud>
 

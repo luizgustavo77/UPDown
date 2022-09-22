@@ -4,9 +4,9 @@ namespace UPDown.Common.AulaAPI
 {
     public class CompetenciaDTO : FTTEntity
     {
-        public long IdProfessor { get; set; }
+        public string IdProfessor { get; set; }
         public string NameProfessor { get; set; }
-        public long IdMateria { get; set; }
+        public string IdMateria { get; set; }
         public string NameMateria { get; set; }
     }
 }
