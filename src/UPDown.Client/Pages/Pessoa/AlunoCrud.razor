@@ -11,8 +11,8 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        cols.Add(new FTTBlazor.FTTGridColumn() { FieldName = "Id", FieldDescription = "Id" });
         cols.Add(new FTTBlazor.FTTGridColumn() { FieldName = "Name", FieldDescription = "Nome" });
+        cols.Add(new FTTBlazor.FTTGridColumn() { FieldName = "Email", FieldDescription = "E-mail" });
     }
 }
 
@@ -20,9 +20,9 @@
 
     <FTTCrud Interface="Common.PessoaAPI.AlunoDTO" Columns="cols" Endpoint="@APIGateway.Alunos" Title="Alunos">
         <ModalContent>
-            <FTTInput Required="true" Label="Nome" @bind-Value="@context.Name" Size="12"></FTTInput>
-            <FTTInput Required="true" Label="E-Mail" Type="InputType.Email" @bind-Value="@context.Email" Size="6"></FTTInput>
-            <FTTInput Required="true" Label="Senha" @bind-Value="@context.Senha" Size="6"></FTTInput>
+            <FTTInput Required="true" Label="Nome" @bind-Value="@context.Name" Size="12" BorderRight="true"></FTTInput>
+            <FTTInput Required="true" Label="E-Mail" Type="InputType.Email" @bind-Value="@context.Email" Size="6" BorderRight="true"></FTTInput>
+            <FTTInput Required="true" Label="Senha" @bind-Value="@context.Senha" Size="6" BorderRight="true"></FTTInput>
         </ModalContent>
     </FTTCrud>
 

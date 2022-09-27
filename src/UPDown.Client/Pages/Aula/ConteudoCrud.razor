@@ -1,4 +1,4 @@
-﻿@page "/competenciacrud"
+﻿@page "/conteudocrud"
 
 @code {
     public List<FTTBlazor.FTTGridColumn> cols = new List<FTTBlazor.FTTGridColumn>();
@@ -13,9 +13,10 @@
 
 <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" style="height: 35rem;">
 
-    <FTTCrud Interface="Common.AulaAPI.CompetenciaDTO" Columns="cols" Endpoint="@APIGateway.Competencias" Title="Competencias">
+    <FTTCrud Interface="Common.AulaAPI.ConteudoDTO" Columns="cols" Endpoint="@APIGateway.Conteudos" Title="Conteudos">
         <ModalContent>
-            <FTTInput Required="true" BorderRight="true" Label="Titulo" @bind-Value="@context.Name" Size="12"></FTTInput>
+            <FTTInput Required="true" Label="Titulo" @bind-Value="@context.Name" Size="12"></FTTInput>
+            @*<FTTCheckbox Label="Disponivel" @bind-Value="@context.Disponivel" Size="4"></FTTCheckbox>*@
             <FTTSelect BorderRight="true"
                        T="Common.AulaAPI.MateriaDTO"
                        Size="6"
@@ -38,6 +39,9 @@
                        Label="Professor"
                        Filter="(x => !string.IsNullOrWhiteSpace(x.Name))">
             </FTTSelect>
+            <FTTInput Required="true" Label="Video" @bind-Value="@context.Video" Size="12"></FTTInput>
+            <FTTInput Label="Documento" @bind-Value="@context.Documento" Size="12"></FTTInput>
+            <FTTInput Label="Descricao" Type="InputType.TextArea" @bind-Value="@context.Descricao" Size="12"></FTTInput>
         </ModalContent>
     </FTTCrud>
 

@@ -28,7 +28,7 @@ namespace AulaAPI.Service
         {
             _ = CreateMap<Competencia, CompetenciaDTO>().ReverseMap();
             _ = CreateMap<Materia, MateriaDTO>().ReverseMap();
-
+            _ = CreateMap<Conteudo, ConteudoDTO>().ReverseMap();
         }
     }
 }

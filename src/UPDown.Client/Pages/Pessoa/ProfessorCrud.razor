@@ -11,8 +11,9 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        cols.Add(new FTTBlazor.FTTGridColumn() { FieldName = "Id", FieldDescription = "Id" });
         cols.Add(new FTTBlazor.FTTGridColumn() { FieldName = "Name", FieldDescription = "Nome" });
+        cols.Add(new FTTBlazor.FTTGridColumn() { FieldName = "Email", FieldDescription = "E-mail" });
+        cols.Add(new FTTBlazor.FTTGridColumn() { FieldName = "CPF", FieldDescription = "CPF" });
     }
 }
 

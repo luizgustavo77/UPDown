@@ -283,3 +283,14 @@ _:-ms-input-placeholder, :root .graph {
 .img-exemple {
     width: 100%
 }
+
+.aula-dialog {
+    top: -10rem !important;
+    height: 120% !important;
+    background-color: black !important;
+}
+
+.aula-conteudo {
+    width: 105rem !important;
+    height: 52rem !important;
+}

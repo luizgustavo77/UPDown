@@ -17,6 +17,7 @@ namespace AulaAPI.Data
         #region Public properties
         public DbSet<Competencia> Competencias { get; set; }
         public DbSet<Materia> Materias { get; set; }
+        public DbSet<Conteudo> Conteudos { get; set; }
         #endregion
 
         #region Overidden methods

@@ -1,0 +1,49 @@
+﻿@page "/aulas"
+
+@code {
+    public List<FTTBlazor.FTTGridColumn> cols = new List<FTTBlazor.FTTGridColumn>();
+
+    public string GetUrl(string video)
+    {
+        if (video.Contains("youtube"))
+        {
+            return video + "?autoplay=1";
+        }
+        else
+        {
+            return video;
+        }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        cols.Add(new FTTBlazor.FTTGridColumn() { FieldName = "Name", FieldDescription = "Nome" });
+        cols.Add(new FTTBlazor.FTTGridColumn() { FieldName = "NameMateria", FieldDescription = "Materia" });
+        cols.Add(new FTTBlazor.FTTGridColumn() { FieldName = "NameProfessor", FieldDescription = "Professor" });
+    }
+}
+
+<div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" style="height: 35rem;">
+
+    <FTTCrud Interface="Common.AulaAPI.ConteudoDTO" CanDelete="false" CanEdit="false" CanCreate="false" Columns="cols" Endpoint="@APIGateway.Conteudos" CssDialog="aula-dialog" CssContent="aula-conteudo" Title="Aula">
+        <ModalContent>
+            <iframe src="@GetUrl(context.Video)" style="height: 30rem;">
+            </iframe>
+
+            <div class="mdl-cell--12-col ftt-blazor-align-left">
+
+                <button class="ftt-blazor-button" type="button" onclick="@context.Documento">
+    
+                    Apostila:
+                    <i class="material-icons">
+                        attach_file
+                    </i>
+                </button>
+
+            </div>
+
+            <FTTInput Label="" Type="InputType.TextArea" IsReadOnly="true" @bind-Value="@context.Descricao" Size="12"></FTTInput>
+        </ModalContent>
+    </FTTCrud>
+
+</div>
