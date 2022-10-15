@@ -1,5 +1,6 @@
 ﻿using AulaAPI.Data;
 using AulaAPI.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
@@ -10,7 +11,7 @@ namespace AulaAPI.Server.Controllers
 {
     // Todo:
     // Melhorar o microserviço para ser mais genérico
-
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class MateriaController

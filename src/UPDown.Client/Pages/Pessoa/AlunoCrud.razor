@@ -1,13 +1,18 @@
 ﻿@page "/alunocrud"
+@attribute [Authorize]
+
+@inject NavigationManager NavManager
+@inject TokenAuthenticationStateProvider TokenProvider
+
+@using UPDown.Common.PessoaAPI
 
 @code {
-#if DEBUG
-    string endpoint = "https://localhost:44306/Aluno";
-#else
-    string endpoint = "https://localhost:44306/Aluno";
-#endif
-
     public List<FTTBlazor.FTTGridColumn> cols = new List<FTTBlazor.FTTGridColumn>();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
 
     protected override async Task OnParametersSetAsync()
     {
@@ -18,7 +23,7 @@
 
 <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" style="height: 35rem;">
 
-    <FTTCrud Interface="Common.PessoaAPI.AlunoDTO" Columns="cols" Endpoint="@APIGateway.Alunos" Title="Alunos">
+    <FTTCrud Interface="Common.PessoaAPI.AlunoDTO" Columns="cols" Token="@TokenProvider.GetToken()" Endpoint="@APIGateway.Alunos" Title="Alunos">
         <ModalContent>
             <FTTInput Required="true" Label="Nome" @bind-Value="@context.Name" Size="12" BorderRight="true"></FTTInput>
             <FTTInput Required="true" Label="E-Mail" Type="InputType.Email" @bind-Value="@context.Email" Size="6" BorderRight="true"></FTTInput>

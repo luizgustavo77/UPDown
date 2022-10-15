@@ -1,10 +1,6 @@
-﻿using FTTBlazor.Common.Core;
-
-namespace UPDown.Common.PessoaAPI
+﻿namespace UPDown.Common.PessoaAPI
 {
-    public class AlunoDTO : FTTEntity
+    public class AlunoDTO : LoginDTO
     {
-        public string Email { get; set; }
-        public string Senha { get; set; }
     }
 }

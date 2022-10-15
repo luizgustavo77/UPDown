@@ -1,4 +1,5 @@
 ﻿@page "/materiacrud"
+@inject TokenAuthenticationStateProvider TokenProvider
 
 @code {
 #if DEBUG
@@ -17,7 +18,7 @@
 
 <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" style="height: 35rem;">
 
-    <FTTCrud Interface="Common.AulaAPI.MateriaDTO" Columns="cols" Endpoint="@APIGateway.Materias" Title="Materias">
+    <FTTCrud Interface="Common.AulaAPI.MateriaDTO" Token="@TokenProvider.GetToken()" Columns="cols" Endpoint="@APIGateway.Materias" Title="Materias">
         <ModalContent>
             <FTTInput Required="true" Label="Nome" @bind-Value="@context.Name" Size="12"></FTTInput>
         </ModalContent>

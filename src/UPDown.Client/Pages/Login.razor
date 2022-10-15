@@ -1,0 +1,63 @@
+﻿@page "/login"
+@using System.Net.Http.Json
+@using UPDown.Common.PessoaAPI
+
+@inject HttpClient Http
+@inject TokenAuthenticationStateProvider AuthStateProvider
+@inject NavigationManager nav
+@inject IJSRuntime js
+
+@code {
+    bool loginFailure;
+    bool logando;
+    protected string email { get; set; } = "";
+    protected string senha { get; set; } = "";
+    public string loginButtonTip { get; set; } = "Login";
+
+    async Task SubmitCredentials()
+    {
+        loginButtonTip = "Autenticando";
+        logando = true;
+
+        try
+        {
+            var result = await Http.GetFromJsonAsync<LoginResultDTO>($"{APIGateway.Login}/{email}/{senha}");
+
+            loginFailure = (string.IsNullOrEmpty(result?.Token));
+
+            if (!loginFailure)
+            {
+                AuthStateProvider.SetToken(result);
+
+                loginButtonTip = "Login";
+
+                base.StateHasChanged();
+
+                nav.NavigateTo("/", forceLoad: true);
+            }
+            else
+            {
+                loginButtonTip = "Login";
+            }
+        }
+        catch (Exception e)
+        {
+            loginFailure = true;
+            loginButtonTip = "Login";
+            Console.WriteLine("ERRO Login " + e.Message);
+        }
+
+        logando = false;
+    }
+}
+
+<div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col mdl-grid">
+        <h2>Login</h2>
+    </div>
+
+    <FTTInput BorderRight="false" Type="InputType.Email" Size="12" Label="E-mail" @bind-Value="email"></FTTInput>
+    <FTTInput BorderRight="false" Size="12" Label="Senha" @bind-Value="senha"></FTTInput>
+    <FTTButton IsReadOnly="logando" Size="12" Label="@loginButtonTip" OnClick="SubmitCredentials"></FTTButton>
+
+</div>

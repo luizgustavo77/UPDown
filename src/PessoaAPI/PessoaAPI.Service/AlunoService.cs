@@ -21,6 +21,24 @@ namespace PessoaAPI.Service
         #endregion
 
         #region Public methods
+        public AlunoDTO Get(Func<Aluno, bool> parametros)
+        {
+            AlunoDTO result = new();
+
+            try
+            {
+                result = _dbContext.Alunos.Where(parametros)
+                                                .Select(x => Mapping.Mapper.Map<AlunoDTO>(x))
+                                                .FirstOrDefault(); ;
+            }
+            catch (Exception)
+            {
+
+            }
+
+            return result;
+        }
+
         public AlunoDTO Get(long Id)
         {
             AlunoDTO result = new();

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 using PessoaAPI.Data;
@@ -10,7 +11,7 @@ namespace PessoaAPI.Server.Controllers
 {
     // Todo:
     // Melhorar o microserviço para ser mais genérico
-
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class AlunoController

@@ -21,6 +21,23 @@ namespace PessoaAPI.Service
         #endregion
 
         #region Public methods
+        public ProfessorDTO Get(Func<Professor, bool> parametros)
+        {
+            ProfessorDTO result = new();
+
+            try
+            {
+                result = _dbContext.Professores.Where(parametros)
+                                                .Select(x => Mapping.Mapper.Map<ProfessorDTO>(x))
+                                                .FirstOrDefault(); ;
+            }
+            catch (Exception)
+            {
+
+            }
+
+            return result;
+        }
         public ProfessorDTO Get(long Id)
         {
             ProfessorDTO result = new();
