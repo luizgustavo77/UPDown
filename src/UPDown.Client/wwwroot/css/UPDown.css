@@ -294,3 +294,11 @@ _:-ms-input-placeholder, :root .graph {
     width: 105rem !important;
     height: 52rem !important;
 }
+
+.page-height {
+    height: 50rem;
+}
+
+.ftt-blazor-header {
+    background-color: rgb(22,27,46) !important;
+}

@@ -51,13 +51,19 @@
     }
 }
 
-<div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-    <div class="mdl-cell mdl-cell--12-col mdl-grid">
+<div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid page-height">
+    <div class="mdl-cell mdl-cell--12-col mdl-grid" style="height: 0px;">
         <h2>Login</h2>
     </div>
 
-    <FTTInput BorderRight="false" Type="InputType.Email" Size="12" Label="E-mail" @bind-Value="email"></FTTInput>
-    <FTTInput BorderRight="false" Size="12" Label="Senha" @bind-Value="senha"></FTTInput>
-    <FTTButton IsReadOnly="logando" Size="12" Label="@loginButtonTip" OnClick="SubmitCredentials"></FTTButton>
+    <div class="mdl-cell--2-col">
+    </div>
+    <div class="mdl-cell--8-col" style="border: 1px solid lightgray; border-radius: 20px; height: 11rem;">
+        <FTTInput BorderRight="false" Type="InputType.Email" Size="12" Label="E-mail" @bind-Value="email"></FTTInput>
+        <FTTInput BorderRight="false" Size="12" Label="Senha" @bind-Value="senha"></FTTInput>
+        <FTTButton IsReadOnly="logando" Size="12" Label="@loginButtonTip" OnClick="SubmitCredentials"></FTTButton>
+    </div>
+    <div class="mdl-cell--2-col">
+    </div>
 
 </div>
